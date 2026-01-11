@@ -36,7 +36,7 @@ open http://localhost:5984/_utils  # credentials: admin/adminpw
 
 **That's it!** You now have a Fabric network with CouchDB running locally.
 
-## 📚 Documentation
+## Documentation
 
 **Comprehensive documentation is available in the [Wiki](wiki/):**
 
