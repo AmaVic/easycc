@@ -123,7 +123,7 @@ pub async fn execute() -> Result<()> {
         println!(
             "  {} - {}",
             org.bright_yellow(),
-            format!("http://localhost:{}", port)
+            format!("http://localhost:{}/_utils", port)
                 .bright_blue()
                 .underline()
         );
