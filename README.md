@@ -2,7 +2,6 @@
 
 [![Build](https://github.com/AmaVic/easycc/workflows/Build/badge.svg)](https://github.com/AmaVic/easycc/actions/workflows/build.yml)
 [![Documentation](https://github.com/AmaVic/easycc/workflows/Documentation/badge.svg)](https://github.com/AmaVic/easycc/actions/workflows/docs.yml)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **Simplify Hyperledger Fabric development with an intuitive CLI**
 
