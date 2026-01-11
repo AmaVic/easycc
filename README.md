@@ -45,6 +45,8 @@ open http://localhost:5984/_utils  # credentials: admin/adminpw
 - **[Command Reference](wiki/Command-Reference.md)** - Complete command documentation
 - **[Testing Guide](wiki/Testing-Guide.md)** - ChaincoderTestr integration
 
+The code documentation is available [here](https://amavic.github.io/easycc/).
+
 ## Prerequisites
 
 - **Docker** (Desktop or Engine) - Container runtime
@@ -80,9 +82,6 @@ easycc clean --all
 ```
 
 See [Command Reference](wiki/Command-Reference.md) for all available commands and options.
-
-## Documentation
-All the user documentation on how to install, update and use mwst is available in the [Wiki](https://github.com/AmaVic/easycc/wiki). The technical documentation is available in the [Docs](https://amavic.github.io/easycc/).
 
 ## Contributors and Funding
 This project is developed and maintained by Victor Amaral de Sousa. It has been requested and funded by Wim Laurier and Satoshi Horiuchi, respectively from the Université Catholique de Louvain (Belgium) and the University of Chuo (Japan).
