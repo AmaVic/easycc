@@ -212,7 +212,7 @@ pub async fn execute(
 
     // Run ChaincoderTestr with output captured to both terminal and log
     let mut child = Command::new(&tester_path)
-        .args(&[
+        .args([
             "--wallet-path",
             &wallet_path_arg,
             "--identity-name",
@@ -234,12 +234,10 @@ pub async fn execute(
     let log_file_clone = Arc::clone(&log_file);
     if let Some(stdout) = child.stdout.take() {
         let reader = BufReader::new(stdout);
-        for line in reader.lines() {
-            if let Ok(line) = line {
-                println!("{}", line);
-                if let Ok(mut file) = log_file_clone.lock() {
-                    let _ = writeln!(file, "{}", line);
-                }
+        for line in reader.lines().map_while(Result::ok) {
+            println!("{}", line);
+            if let Ok(mut file) = log_file_clone.lock() {
+                let _ = writeln!(file, "{}", line);
             }
         }
     }
@@ -247,12 +245,10 @@ pub async fn execute(
     let log_file_clone2 = Arc::clone(&log_file);
     if let Some(stderr) = child.stderr.take() {
         let reader = BufReader::new(stderr);
-        for line in reader.lines() {
-            if let Ok(line) = line {
-                eprintln!("{}", line);
-                if let Ok(mut file) = log_file_clone2.lock() {
-                    let _ = writeln!(file, "STDERR: {}", line);
-                }
+        for line in reader.lines().map_while(Result::ok) {
+            eprintln!("{}", line);
+            if let Ok(mut file) = log_file_clone2.lock() {
+                let _ = writeln!(file, "STDERR: {}", line);
             }
         }
     }

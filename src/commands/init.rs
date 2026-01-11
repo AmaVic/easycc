@@ -165,7 +165,7 @@ pub async fn execute(
 }
 
 fn create_workspace_structure(
-    workspace_path: &PathBuf,
+    workspace_path: &Path,
     config: &NetworkConfig,
     chaincode_source: Option<&str>,
     _chaincode_provided: bool,

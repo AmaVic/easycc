@@ -8,7 +8,7 @@ use crate::workspace;
 use anyhow::{Context, Result, bail};
 use colored::Colorize;
 use std::net::TcpStream;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::thread;
 use std::time::Duration;
@@ -152,8 +152,8 @@ pub async fn execute(
 }
 
 fn package_chaincode(
-    workspace_root: &PathBuf,
-    chaincode_path: &PathBuf,
+    workspace_root: &Path,
+    chaincode_path: &Path,
     name: &str,
     version: &str,
 ) -> Result<PathBuf> {
@@ -169,7 +169,7 @@ fn package_chaincode(
     // Package the chaincode source (peer will build it during install, but we already built it)
     // Use the chaincode directory directly
     let status = Command::new(&peer)
-        .args(&[
+        .args([
             "lifecycle",
             "chaincode",
             "package",
@@ -194,9 +194,9 @@ fn package_chaincode(
 }
 
 fn install_chaincode(
-    workspace_root: &PathBuf,
+    workspace_root: &Path,
     config: &NetworkConfig,
-    package_file: &PathBuf,
+    package_file: &Path,
     name: &str,
     version: &str,
 ) -> Result<String> {
@@ -225,7 +225,7 @@ fn install_chaincode(
         );
 
         let output = Command::new(&peer)
-            .args(&[
+            .args([
                 "lifecycle",
                 "chaincode",
                 "install",
@@ -247,12 +247,12 @@ fn install_chaincode(
             if stderr.contains("chaincode already successfully installed") {
                 // Extract package ID from error message
                 // Format: "...package ID 'name_version:hash'..."
-                if let Some(start) = stderr.find("package ID '") {
-                    if let Some(end) = stderr[start + 12..].find('\'') {
-                        let extracted_id = &stderr[start + 12..start + 12 + end];
-                        if !extracted_id.is_empty() {
-                            package_id = extracted_id.to_string();
-                        }
+                if let Some(start) = stderr.find("package ID '")
+                    && let Some(end) = stderr[start + 12..].find('\'')
+                {
+                    let extracted_id = &stderr[start + 12..start + 12 + end];
+                    if !extracted_id.is_empty() {
+                        package_id = extracted_id.to_string();
                     }
                 }
                 println!("  ✓ Already installed on peer0.{}", domain);
@@ -311,7 +311,7 @@ fn install_chaincode(
         );
 
         let output = Command::new(&peer)
-            .args(&["lifecycle", "chaincode", "queryinstalled"])
+            .args(["lifecycle", "chaincode", "queryinstalled"])
             .env("FABRIC_CFG_PATH", fabric_cfg_path.to_str().unwrap())
             .env("CORE_PEER_TLS_ENABLED", "true")
             .env("CORE_PEER_LOCALMSPID", &msp_id)
@@ -371,7 +371,7 @@ fn wait_for_orderer(_workspace_root: &PathBuf) -> Result<()> {
 }
 
 fn approve_chaincode(
-    workspace_root: &PathBuf,
+    workspace_root: &Path,
     config: &NetworkConfig,
     name: &str,
     version: &str,
@@ -412,7 +412,7 @@ fn approve_chaincode(
         );
 
         let output = Command::new(&peer)
-            .args(&[
+            .args([
                 "lifecycle",
                 "chaincode",
                 "approveformyorg",
@@ -455,7 +455,7 @@ fn approve_chaincode(
 }
 
 fn commit_chaincode(
-    workspace_root: &PathBuf,
+    workspace_root: &Path,
     config: &NetworkConfig,
     name: &str,
     version: &str,

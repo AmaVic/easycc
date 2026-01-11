@@ -74,7 +74,7 @@ pub async fn execute() -> Result<()> {
     // Start Docker containers
     println!("🐳 Starting Docker containers...");
     let status = Command::new("docker-compose")
-        .args(&["-f", docker_compose_path.to_str().unwrap(), "up", "-d"])
+        .args(["-f", docker_compose_path.to_str().unwrap(), "up", "-d"])
         .current_dir(&workspace_root)
         .status()
         .context("Failed to run docker-compose")?;
@@ -164,7 +164,7 @@ fn create_channel(workspace_root: &std::path::Path) -> Result<()> {
 
     for attempt in 1..=max_retries {
         let output = Command::new(&osnadmin)
-            .args(&[
+            .args([
                 "channel",
                 "join",
                 "--channelID",
@@ -263,7 +263,7 @@ fn join_peers_to_channel(workspace_root: &std::path::Path, config: &NetworkConfi
 
         // Join peer to channel
         let status = Command::new(&peer)
-            .args(&["channel", "join", "-b", block_path.to_str().unwrap()])
+            .args(["channel", "join", "-b", block_path.to_str().unwrap()])
             .env("FABRIC_CFG_PATH", fabric_cfg_path.to_str().unwrap())
             .env("CORE_PEER_TLS_ENABLED", "true")
             .env("CORE_PEER_LOCALMSPID", &msp_id)
@@ -284,7 +284,7 @@ fn join_peers_to_channel(workspace_root: &std::path::Path, config: &NetworkConfi
 fn check_existing_networks(_config: &NetworkConfig) -> Result<()> {
     // Check for both running and stopped Fabric containers
     let output = Command::new("docker")
-        .args(&["ps", "-a", "--format", "{{.Names}}"])
+        .args(["ps", "-a", "--format", "{{.Names}}"])
         .output()
         .context("Failed to check Docker containers")?;
 
@@ -297,7 +297,7 @@ fn check_existing_networks(_config: &NetworkConfig) -> Result<()> {
     if !fabric_containers.is_empty() {
         // Check if any are running
         let running_output = Command::new("docker")
-            .args(&["ps", "--format", "{{.Names}}"])
+            .args(["ps", "--format", "{{.Names}}"])
             .output()
             .context("Failed to check running containers")?;
 
@@ -342,13 +342,13 @@ fn check_existing_networks(_config: &NetworkConfig) -> Result<()> {
             // Remove containers
             for container in fabric_containers {
                 let _ = Command::new("docker")
-                    .args(&["rm", "-f", "-v", container])
+                    .args(["rm", "-f", "-v", container])
                     .output();
             }
 
             // Also remove any named volumes that might contain ledger data
             let volume_output = Command::new("docker")
-                .args(&["volume", "ls", "-q"])
+                .args(["volume", "ls", "-q"])
                 .output()
                 .context("Failed to list volumes")?;
 
@@ -362,7 +362,7 @@ fn check_existing_networks(_config: &NetworkConfig) -> Result<()> {
 
             for volume in fabric_volumes {
                 let _ = Command::new("docker")
-                    .args(&["volume", "rm", "-f", volume])
+                    .args(["volume", "rm", "-f", volume])
                     .output();
             }
 
@@ -443,7 +443,7 @@ fn update_etc_hosts(organizations: &[String]) -> Result<()> {
         let status = if cfg!(windows) {
             // Windows: use PowerShell with elevated privileges
             Command::new("powershell")
-                .args(&[
+                .args([
                     "-Command",
                     &format!("Add-Content -Path '{}' -Value '{}'", hosts_path, hosts_line),
                 ])
@@ -452,7 +452,7 @@ fn update_etc_hosts(organizations: &[String]) -> Result<()> {
         } else {
             // Unix/Mac: use sudo
             Command::new("sudo")
-                .args(&[
+                .args([
                     "sh",
                     "-c",
                     &format!("echo '{}' >> {}", hosts_line, hosts_path),
@@ -517,7 +517,7 @@ fn update_anchor_peers(workspace_root: &std::path::Path, config: &NetworkConfig)
         let configtx_yaml = workspace_root.join("configtx.yaml");
 
         let status = Command::new(&configtxgen)
-            .args(&[
+            .args([
                 "-profile",
                 "TwoOrgsApplicationGenesis",
                 "-outputAnchorPeersUpdate",
@@ -539,7 +539,7 @@ fn update_anchor_peers(workspace_root: &std::path::Path, config: &NetworkConfig)
 
         // Update anchor peer
         let _ = Command::new(&peer)
-            .args(&[
+            .args([
                 "channel", "update",
                 "-c", "mychannel",
                 "-f", anchor_tx.to_str().unwrap(),

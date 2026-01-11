@@ -62,7 +62,7 @@ fn download_fabric_binaries(bin_dir: &Path) -> Result<()> {
     // Download using curl
     let tar_path = bin_dir.join("fabric.tar.gz");
     let status = Command::new("curl")
-        .args(&["-L", &url, "-o", tar_path.to_str().unwrap()])
+        .args(["-L", &url, "-o", tar_path.to_str().unwrap()])
         .status()
         .context("Failed to execute curl")?;
 
@@ -72,7 +72,7 @@ fn download_fabric_binaries(bin_dir: &Path) -> Result<()> {
 
     // Extract the tar.gz (it contains a 'bin' directory)
     let status = Command::new("tar")
-        .args(&[
+        .args([
             "-xzf",
             tar_path.to_str().unwrap(),
             "-C",
@@ -156,7 +156,7 @@ pub fn run_cryptogen(config_path: &Path, output_path: &Path) -> Result<()> {
     let cryptogen = bin_dir.join("cryptogen");
 
     let status = Command::new(&cryptogen)
-        .args(&[
+        .args([
             "generate",
             "--config",
             config_path.to_str().unwrap(),

@@ -7,7 +7,7 @@ use crate::workspace;
 use anyhow::{Context, Result, bail};
 use colored::Colorize;
 use serde_json::json;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 /// Executes the export command.
 ///
@@ -96,10 +96,10 @@ pub async fn execute(output: Option<String>) -> Result<()> {
 }
 
 fn export_connection_profile(
-    workspace_root: &PathBuf,
+    workspace_root: &Path,
     config: &NetworkConfig,
     org: &str,
-    output_dir: &PathBuf,
+    output_dir: &Path,
 ) -> Result<()> {
     let domain = format!("{}.example.com", org.to_lowercase());
     let org_index = config.organizations.iter().position(|o| o == org).unwrap();
@@ -211,10 +211,10 @@ fn export_connection_profile(
 }
 
 fn export_wallet(
-    workspace_root: &PathBuf,
+    workspace_root: &Path,
     config: &NetworkConfig,
     org: &str,
-    output_dir: &PathBuf,
+    output_dir: &Path,
 ) -> Result<()> {
     let domain = format!("{}.example.com", org.to_lowercase());
     // Get org index to determine MSP ID (Org1MSP, Org2MSP, etc.)
@@ -248,8 +248,8 @@ fn export_wallet(
         bail!("No private key found for admin of {}", org);
     }
 
-    let admin_key = std::fs::read_to_string(&key_files[0].path())
-        .context("Failed to read admin private key")?;
+    let admin_key =
+        std::fs::read_to_string(key_files[0].path()).context("Failed to read admin private key")?;
 
     // Create wallet identity file (compatible with Fabric SDK)
     let identity = json!({
@@ -308,7 +308,7 @@ fn extract_public_key_from_cert(cert_pem: &str) -> Result<String> {
     // Use openssl to get the public key in DER format, then base64 encode it
 
     let mut child = Command::new("openssl")
-        .args(&["x509", "-pubkey", "-noout"])
+        .args(["x509", "-pubkey", "-noout"])
         .stdin(std::process::Stdio::piped())
         .stdout(std::process::Stdio::piped())
         .stderr(std::process::Stdio::piped())
@@ -331,7 +331,7 @@ fn extract_public_key_from_cert(cert_pem: &str) -> Result<String> {
 
     // Now convert PEM to DER format (binary)
     let mut child2 = Command::new("openssl")
-        .args(&["pkey", "-pubin", "-outform", "DER"])
+        .args(["pkey", "-pubin", "-outform", "DER"])
         .stdin(std::process::Stdio::piped())
         .stdout(std::process::Stdio::piped())
         .stderr(std::process::Stdio::piped())

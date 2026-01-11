@@ -34,7 +34,7 @@ pub async fn execute() -> Result<()> {
     // Stop containers and remove volumes using docker-compose
     println!("🐳 Stopping Docker containers and removing volumes...");
     let status = Command::new("docker-compose")
-        .args(&["-f", docker_compose_path.to_str().unwrap(), "down", "-v"])
+        .args(["-f", docker_compose_path.to_str().unwrap(), "down", "-v"])
         .current_dir(&workspace_root)
         .status()
         .context("Failed to run docker-compose down")?;
