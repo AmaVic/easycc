@@ -5,7 +5,7 @@
             "name": "Create First EconomicAgent (Elmo)",
             "businessEventName": "EVcrEconomicAgent",
             "payload": {
-                "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEjPMPRUDpmp5Vk336D2aVwH0FBmJF9tVA/a6gL479m9ivNypuzc+p9IB4ipWwIyPDkXnKcQeHh++cAhO4HCgSjw==",
+                "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEeX2fmIfwZo1C5EeglmBIcIYQeTi8gubCwoUj9zlCDXlMtp+8RwsflUBptgu445FUDMymFR4Hgw9t4+Fs+na4OQ==",
                 "Name": "Elmo"
             },
             "expectedToSucceed": true,
@@ -28,7 +28,7 @@
             "name": "Create Second EconomicAgent(Cookie)",
             "businessEventName": "EVcrEconomicAgent",
             "payload": {
-                "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAESiPmtu3+umTiMnQoXYs8hfdoZWXEgve8qYUlr+yU6ZwqbE10tkwmgKoC6UbBc2CEkyUonl7Ywr01Gmfn2bCbUA==",
+                "publicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEg4Q7f7Moh87oWdei/jQWRzsHlJ2jgKSVGpMbgZL+hkwjadsvDPuxF9WJr6YYbhW8DfIvBWxLiBoWgXGckRbXMg==",
                 "Name": "Cookie"
             },
             "expectedToSucceed": true,
