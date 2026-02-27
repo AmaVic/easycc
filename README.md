@@ -82,5 +82,5 @@ easycc clean --all
 
 See [Command Reference](wiki/Command-Reference.md) for all available commands and options.
 
-## Contributors and Funding
-This project is developed and maintained by Victor Amaral de Sousa. It has been requested and funded by Wim Laurier and Satoshi Horiuchi, respectively from the Université Catholique de Louvain (Belgium) and the University of Chuo (Japan).
+## Funding
+This work was supported by the *Fund for the Promotion of Joint International Research (Fostering Joint International Research (B))* of the **Japan Society for the Promotion of Science (JSPS)** under Grant Number **19KK0037**.
