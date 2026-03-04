@@ -8,7 +8,7 @@ use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-const FABRIC_VERSION: &str = "2.5.0";
+const FABRIC_VERSION: &str = "2.5.9";
 
 /// Returns the directory where Fabric binaries are stored.
 ///

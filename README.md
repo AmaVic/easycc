@@ -49,7 +49,6 @@ The code documentation is available [here](https://amavic.github.io/easycc/).
 ## Prerequisites
 
 - **Docker** (Desktop or Engine) - Container runtime
-- **Hyperledger Fabric binaries** (2.5.0+) - Tools like `peer`, `configtxgen`
 
 See [Installation Guide](wiki/Installation.md) for detailed setup instructions
 

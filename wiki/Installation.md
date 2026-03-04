@@ -40,22 +40,6 @@ Download and install Docker Desktop from https://www.docker.com/products/docker-
 - [Enable WSL 2 backend](https://docs.docker.com/desktop/features/wsl/)
 - Ensure Docker Desktop is running before using EasyCC
 
-### Hyperledger Fabric Binaries
-
-EasyCC requires Fabric binaries (peer, orderer, configtxgen, etc.) version 2.5.0.
-
-#### All Platforms
-```bash
-# Download and install Fabric binaries
-curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.5.9 1.5.12 -d -s
-
-# This installs binaries to ./fabric-samples/bin
-# Add to your PATH or use FABRIC_BIN_PATH environment variable
-export FABRIC_BIN_PATH=~/fabric-samples/bin
-```
-
-**Alternative**: Download binaries from https://github.com/hyperledger/fabric/releases
-
 ### Java Development Kit (JDK) - Optional
 
 **Not required for basic chaincode deployment**. 
@@ -108,23 +92,6 @@ Check that Docker is running:
 ```bash
 docker ps
 ```
-
-Check that Fabric binaries are accessible:
-```bash
-peer version
-```
-
-## Environment Configuration
-
-### FABRIC_BIN_PATH (Optional)
-
-If Fabric binaries are not in your system PATH, set the `FABRIC_BIN_PATH` environment variable:
-
-```bash
-export FABRIC_BIN_PATH=/path/to/fabric-samples/bin
-```
-
-Add to your shell profile (~/.bashrc, ~/.zshrc, etc.) to make it permanent.
 
 ## Next Steps
 
