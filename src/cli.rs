@@ -8,7 +8,7 @@ use clap::{Parser, Subcommand};
 /// Main CLI structure for the EasyCC tool.
 #[derive(Parser)]
 #[command(name = "easycc")]
-#[command(version = "0.1.0")]
+#[command(version = "0.1.3")]
 /// Available CLI commands.
 #[command(about = "Easy Hyperledger Fabric network setup for chaincode testing", long_about = None)]
 pub struct Cli {
